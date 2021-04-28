@@ -41,14 +41,3 @@ def updateGL():
 
 if __name__ == '__main__':
     updateGL()
-
-
-    # sum_sht.range('C:C').insert()
-    # sum_sht.range('C5').value = 'Account Name'
-    # sum_sht.range('C5').value = '=IFERROR(XLOOKUP(B5,Lists!A:A,Lists!B:B),"not found")'
-    # sum_sht.range('C5').api.AutoFill(sum_sht.range("C5:C50").api)
-    # sum_sht.range('G:G').insert()
-    # sum_sht.range('G4').value = 'M2M Change'
-    # sum_sht.range('G5').value = '=IF(ISNUMBER(CUBEVALUE("pgsql01 Finance FinanceSecure",$B$1,$H$1,A5,E$1))=TRUE,CUBEVALUE("pgsql01 Finance FinanceSecure",$B$1,$H$1,A5,E$1),0)'
-    # sum_sht.range('G5').api.AutoFill(sum_sht.range("G5:G50").api)
-    # sum_sht.range('G:G').hide()
