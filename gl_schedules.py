@@ -2,12 +2,14 @@ import os
 import xlwings as xw
 import datetime
 import time
+import pandas as pd
 
 
 def updateGL():
     wb1 = xw.Book(r"C:\Users\tyler.anderson\Documents\Finance\GL Codes List for Schedules.xlsm", update_links=False)
     ws = wb1.sheets['Summary']
     data = ws.range("B5:B46").value
+    df = pd.DataFrame(data)
     xw.apps.active.quit()
     path = r"P:\PACS\Finance\Month End Close"
     path = r"C:\Users\tyler.anderson"
@@ -28,8 +30,7 @@ def updateGL():
                     if year > 2020 and month > 3:
                         wb = xw.Book(file, update_links=False)
                         sum_sht = wb.sheets('Summary')
-                        for i, code in enumerate(data):
-                            sum_sht.range("B" + str(i+5)).value = code
+                        sum_sht.range("B5").value = df.values
                         addin_file = xw.Book(r'C:\Users\tyler.anderson\AppData\Roaming\Microsoft\AddIns\1005-Duplicate Sheet.xlam', update_links=False)
                         macro = addin_file.macro('DupSheet.updateSummary')
                         macro()
