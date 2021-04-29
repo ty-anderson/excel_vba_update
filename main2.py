@@ -1,6 +1,7 @@
 import os
 import xlwings as xw
 import datetime
+import time
 
 
 def updateGL():
@@ -32,8 +33,13 @@ def updateGL():
                         addin_file = xw.Book(r'C:\Users\tyler.anderson\AppData\Roaming\Microsoft\AddIns\1005-Duplicate Sheet.xlam', update_links=False)
                         macro = addin_file.macro('DupSheet.updateSummary')
                         macro()
-                        wb.save()
-                        wb.close()
+                        while True:
+                            try:
+                                wb.save()
+                                wb.close()
+                                break
+                            except:
+                                time.sleep(5)
                     break
     xw.apps.active.quit()
 
