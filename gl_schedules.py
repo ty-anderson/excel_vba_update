@@ -29,6 +29,10 @@ def updateGL():
                     year = date_value.year
                     if year > 2020 and month > 3:
                         wb = xw.Book(file, update_links=False)
+                        app = xw.apps.active
+                        win_wb = wb.api
+                        for obj in win_wb.VBProject.VBComponents:
+                            print(obj.Name)
                         sum_sht = wb.sheets('Summary')
                         sum_sht.range("B5").value = df.values
                         addin_file = xw.Book(r'C:\Users\tyler.anderson\AppData\Roaming\Microsoft\AddIns\1005-Duplicate Sheet.xlam', update_links=False)
