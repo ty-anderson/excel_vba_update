@@ -12,7 +12,7 @@ def updateGL():
     data = ws.range("B5:B66").value
     df = pd.DataFrame(data)
     xw.apps.active.quit()
-    archive = r'P:\PACS\Finance\Tyler Anderson\Archive\GL Schedules'
+    archive = r'P:\PACS\Finance\Automation\Archive\GL Schedules'
     path = r"P:\PACS\Finance\Month End Close"
     path = r"C:\Users\tyler.anderson"
     main_folders = os.listdir(path)
@@ -214,7 +214,7 @@ End Sub'''
                         sum_sht = wb.sheets('Summary')
                         sum_sht.range("B5").value = df.values
                         macro = addin_file.macro('DupSheet.updateSummary')
-                        time.sleep(5)
+                        time.sleep(10)
                         macro()
                         while True:
                             try:
