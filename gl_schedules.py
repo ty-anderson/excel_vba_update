@@ -3,14 +3,16 @@ import xlwings as xw
 import datetime
 import time
 import pandas as pd
+import shutil
 
 
 def updateGL():
     wb1 = xw.Book(r"C:\Users\tyler.anderson\Documents\Finance\GL Codes List for Schedules.xlsm", update_links=False)
     ws = wb1.sheets['Summary']
-    data = ws.range("B5:B46").value
+    data = ws.range("B5:B66").value
     df = pd.DataFrame(data)
     xw.apps.active.quit()
+    archive = r'P:\PACS\Finance\Tyler Anderson\Archive\GL Schedules'
     path = r"P:\PACS\Finance\Month End Close"
     path = r"C:\Users\tyler.anderson"
     main_folders = os.listdir(path)
@@ -28,6 +30,9 @@ def updateGL():
                     month = date_value.month
                     year = date_value.year
                     if year > 2020 and month > 3:
+                        # ADD CODE TO SAVE COPY OF OLD VERSION
+                        new_file = os.path.join(archive, filename)
+                        shutil.copy(file, new_file)
                         wb = xw.Book(file, update_links=False)
                         addin_file = xw.Book(r"C:\Users\tyler.anderson\AppData\Roaming\Microsoft\AddIns\1005-Duplicate Sheet.xlam", update_links=False)
                         win_wb = wb.api
@@ -132,6 +137,8 @@ End Sub
 
 Sub Refresh()
 
+    On Error GoTo handle
+
     'Excel fast working state
     Application.Calculation = xlManual
     Application.ScreenUpdating = False
@@ -188,6 +195,17 @@ Sub Refresh()
     Application.Calculation = xlAutomatic
     Application.DisplayAlerts = True
     Application.StatusBar = False
+    Exit Sub
+    
+handle:
+     wb.RefreshAll
+    
+    'set excel back to normal
+    Application.ScreenUpdating = True
+    Application.Calculation = xlAutomatic
+    Application.DisplayAlerts = True
+    Application.StatusBar = False
+
 
 End Sub'''
                                 obj.CodeModule.AddFromString(code)
@@ -205,7 +223,7 @@ End Sub'''
                                 break
                             except:
                                 time.sleep(5)
-                    # break
+                    break
     xw.apps.active.quit()
 
 
