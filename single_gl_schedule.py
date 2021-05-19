@@ -13,8 +13,8 @@ def updateGL():
     df = pd.DataFrame(data)
     xw.apps.active.quit()
     archive = r'P:\PACS\Finance\Automation\Archive\GL Schedules'
-    filename = r"03-2021 Vineyard - GL Schedules.xlsm"
-    dirpath = r"P:\PACS\Finance\Month End Close\Vineyard\2021 - ME Schedules"
+    filename = r"2021-03 Napa - GL Schedules.xlsm"
+    dirpath = r"P:\PACS\Finance\Month End Close\Napa\2021 - ME Schedules"
     file = os.path.join(dirpath, filename)
     modified_time = os.path.getmtime(file)
     date_value = datetime.datetime.fromtimestamp(modified_time)
