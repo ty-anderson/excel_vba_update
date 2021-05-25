@@ -140,7 +140,7 @@ def updateGL():
     End Sub'''
                                     obj.CodeModule.AddFromString(code)
                                     win_wb.Application.Run('Module1.Refresh')
-                                    break
+                                    # break
                             while True:
                                 try:
                                     wb.save()
