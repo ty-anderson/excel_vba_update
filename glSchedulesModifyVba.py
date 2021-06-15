@@ -199,21 +199,23 @@ handle:
     End Sub'''
                                     obj.CodeModule.AddFromString(code)
                                     win_wb.Application.Run('Module1.Refresh')
-                                    # break
+                                    xl = xw.apps.active.api
+                                    break
                             while True:
                                 try:
                                     wb.save()
                                     wb.close()
+                                    xl.Quit()
                                     break
                                 except:
+                                    print("error exiting excel. waiting 5 seconds")
                                     time.sleep(5)
                         except Exception as e:
                             with open("GL schedules.txt", "a") as f:
                                 f.write(f"Cound not run for {str(file)} due to exception {e}")
                                 f.close()
                             print("Could not run for " + str(file))
-                    break
-
+                    # break
 
 if __name__ == '__main__':
     updateGL()
