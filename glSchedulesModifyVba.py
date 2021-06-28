@@ -20,7 +20,7 @@ def updateGL():
                     date_value = datetime.datetime.fromtimestamp(modified_time)
                     month = date_value.month
                     year = date_value.year
-                    if year > 2020 and month > 4:
+                    if year > 2020 and month > 5:
                         # SAVE COPY OF OLD VERSION
                         new_file = os.path.join(archive, filename)
                         shutil.copy(file, new_file)
@@ -227,6 +227,7 @@ handle:
                                 f.close()
                             print("Could not run for " + str(file))
                     # break
+
 
 if __name__ == '__main__':
     updateGL()
