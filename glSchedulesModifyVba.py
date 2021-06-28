@@ -141,9 +141,9 @@ handler:
         On Error GoTo handle
     
         'Excel fast working state
-        Application.Calculation = xlManual
-        Application.ScreenUpdating = False
-        Application.DisplayAlerts = False
+        'Application.Calculation = xlManual
+        'Application.ScreenUpdating = False
+        'Application.DisplayAlerts = False
     
 '        Dim wb As Workbook
 '        Dim ws As Worksheet
@@ -192,10 +192,10 @@ handler:
         ThisWorkbook.RefreshAll
         
         'set excel back to normal
-        Application.ScreenUpdating = True
-        Application.Calculation = xlAutomatic
-        Application.DisplayAlerts = True
-        Application.StatusBar = False
+        'Application.ScreenUpdating = True
+        'Application.Calculation = xlAutomatic
+        'Application.DisplayAlerts = True
+        'Application.StatusBar = False
         Exit Sub
         
 handle:
@@ -209,7 +209,7 @@ handle:
     
     End Sub'''
                                     obj.CodeModule.AddFromString(code)
-                                    win_wb.Application.Run('Module1.Refresh')
+                                    # win_wb.Application.Run('Module1.Refresh')
                                     xl = xw.apps.active.api
                                     break
                             while True:
