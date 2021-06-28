@@ -6,7 +6,7 @@ import shutil
 
 
 def updateGL():
-    archive = r'P:\PACS\Finance\Automation\Archive\GL Schedules 2'
+    archive = r'P:\PACS\Finance\Automation\Archive\GL Schedules 3'
     path = r"P:\PACS\Finance\Month End Close"
     main_folders = os.listdir(path)
     for folder in main_folders:
@@ -93,6 +93,7 @@ Sub Add_Acct()
     Sheets("Summary").Move Before:=Sheets(1)
     
     'UPDATE SUMMARY PAGE
+    
     Set ws = ThisWorkbook.Sheets("Summary")
     LastRow = ws.Cells(ws.Rows.Count, "A").End(xlUp).Row
     
@@ -114,7 +115,7 @@ Sub Add_Acct()
         
         'EXTEND FORMULAS TO THE BOTTOM
         ws.Range("A6:A" & LastRow).FillDown
-        ws.Range("C6:E" & LastRow).FillDown
+        ws.Range("C6:G" & LastRow).FillDown
         
     'SET EXCEL BACK TO NORMAL AND END
     Application.ScreenUpdating = True
@@ -198,11 +199,14 @@ handler:
         Exit Sub
         
 handle:
+        
         'set excel back to normal
         Application.ScreenUpdating = True
         Application.Calculation = xlAutomatic
         Application.DisplayAlerts = True
         Application.StatusBar = False
+    
+    
     End Sub'''
                                     obj.CodeModule.AddFromString(code)
                                     win_wb.Application.Run('Module1.Refresh')
