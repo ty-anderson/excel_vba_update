@@ -30,7 +30,8 @@ def updateGL():
                             for obj in win_wb.VBProject.VBComponents:
                                 if obj.Name == 'Module1':
                                     obj.CodeModule.DeleteLines(1, 168)
-                                    code = '''Sub Add_Acct()
+                                    code = '''
+Sub Add_Acct()
     
     On Error GoTo handler
     
@@ -92,19 +93,28 @@ def updateGL():
     Sheets("Summary").Move Before:=Sheets(1)
     
     'UPDATE SUMMARY PAGE
-    x = 5
     Set ws = ThisWorkbook.Sheets("Summary")
+    LastRow = ws.Cells(ws.Rows.Count, "A").End(xlUp).Row
     
-    For Each sht In Worksheets
-        If IsNumeric(sht.Name) = True Then
-            ws.Cells(x, 2).Value = sht.Name
-            x = x + 1
-        End If
+    For Each cell In ws.Range("B5:B100")
+        tmpval = cell.Value
+            If cell.Value > CDbl(myValue) And prev_val < CDbl(myValue) Then
+                cell.EntireRow.Insert Shift:=xlDown
+                For Each c In ws.Range("B5:B100")
+                    If c.Value = "" Then
+                        c.Value = myValue
+                        LastRow = LastRow + 1
+                        Exit For
+                    End If
+                Next
+                
+            End If
+        prev_val = cell.Value
     Next
         
         'EXTEND FORMULAS TO THE BOTTOM
-        ws.Range("A5:A" & (x - 1)).FillDown
-        ws.Range("C5:E" & (x - 1)).FillDown
+        ws.Range("A6:A" & LastRow).FillDown
+        ws.Range("C6:E" & LastRow).FillDown
         
     'SET EXCEL BACK TO NORMAL AND END
     Application.ScreenUpdating = True
@@ -188,14 +198,11 @@ handler:
         Exit Sub
         
 handle:
-        
         'set excel back to normal
         Application.ScreenUpdating = True
         Application.Calculation = xlAutomatic
         Application.DisplayAlerts = True
         Application.StatusBar = False
-    
-    
     End Sub'''
                                     obj.CodeModule.AddFromString(code)
                                     win_wb.Application.Run('Module1.Refresh')
