@@ -187,7 +187,7 @@ End Sub
                                     time.sleep(5)
                         except Exception as e:
                             with open("GL schedules.txt", "a") as f:
-                                f.write(f"Cound not run for {str(file)} due to exception {e}")
+                                f.write(f"Cound not run for {str(file)} due to exception {e} \n")
                                 f.close()
                             print("Could not run for " + str(file))
                     # break
